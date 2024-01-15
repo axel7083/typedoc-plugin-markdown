@@ -1,0 +1,10 @@
+{
+  "extends": "./typedoc.base.json",
+  "plugin": ["typedoc-plugin-markdown"],
+  "outputFileStrategy": "nodeuls",
+  "hidePageHeader": false,
+  "hideBreadcrumbs": false,
+  "expandObjects": true,
+  "useCodeBlocks": false,
+  "excludeGroups": true
+}

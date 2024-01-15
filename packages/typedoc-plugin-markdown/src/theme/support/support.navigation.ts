@@ -6,50 +6,56 @@ import {
   ReflectionCategory,
   ReflectionGroup,
   ReflectionKind,
-  Renderer,
-  TypeDocOptions,
 } from 'typedoc';
-import { OutputFileStrategy } from '../options/maps';
-import { NavigationItem } from '../theme/models';
-import { MarkdownTheme } from './theme';
+import { MarkdownTheme } from '../..';
+import { OutputFileStrategy } from '../../plugin/options/option-maps';
+import { text } from './support.text';
 
-export class NavigationContext {
-  navigation: NavigationItem[] = [];
+export interface NavigationItem {
+  title: string;
+  url?: string;
+  children?: NavigationItem[];
+  isReadme?: boolean;
+  isGroup?: boolean;
+}
 
-  constructor(
-    public theme: MarkdownTheme,
-    public options: Partial<TypeDocOptions>,
-    public renderer: Renderer,
-  ) {}
+export function getNavigation(
+  theme: MarkdownTheme,
+  project: ProjectReflection,
+) {
+  const options = theme.application.options;
+  const navigation: NavigationItem[] = [];
+  const optionsForPackages = (theme.application.renderer as any).packageOptions;
 
-  getNavigation(project: ProjectReflection): NavigationItem[] {
-    const isPackages =
-      this.options.entryPointStrategy === EntryPointStrategy.Packages;
+  const isPackages =
+    options.getValue('entryPointStrategy') === EntryPointStrategy.Packages;
 
-    if (isPackages) {
-      if (Object.keys((this.renderer as any).packages)?.length === 1) {
-        this.buildNavigationFromProject(project);
-      } else {
-        project.children?.forEach((projectChild) => {
-          this.buildNavigationFromPackage(projectChild);
-        });
-      }
+  if (isPackages) {
+    if (Object.keys(optionsForPackages)?.length === 1) {
+      buildNavigationFromProject(project);
     } else {
-      this.buildNavigationFromProject(project);
+      project.children?.forEach((projectChild) => {
+        buildNavigationFromPackage(projectChild);
+      });
     }
-
-    return this.navigation;
+  } else {
+    buildNavigationFromProject(project);
   }
 
-  buildNavigationFromPackage(projectChild: DeclarationReflection) {
-    const entryFileName = this.options.entryFileName as string;
+  return navigation;
+
+  function buildNavigationFromPackage(projectChild: DeclarationReflection) {
+    const entryFileName = options.getValue('entryFileName');
     const preservePackageReadme =
-      Boolean(projectChild.readme) && !this.options.mergeReadme;
+      Boolean(projectChild.readme) && !options.getValue('mergeReadme');
 
-    const packageMeta = (this.renderer as any).packages[projectChild.name];
+    const packageOptions = optionsForPackages[projectChild.name];
 
-    const outputFileStrategy =
-      packageMeta?.outputFileStrategy || this.options.outputFileStrategy;
+    const isSet = packageOptions.isSet('outputFileStrategy');
+
+    const outputFileStrategy = isSet
+      ? packageOptions.getValue('outputFileStrategy')
+      : options.getValue('outputFileStrategy');
 
     const projectChildUrl = preservePackageReadme
       ? `${path.dirname(projectChild.url as string)}/${entryFileName}`
@@ -69,68 +75,62 @@ export class NavigationContext {
       outputFileStrategy === OutputFileStrategy.Modules
     ) {
       children.push({
-        title: this.theme.getTextContent('label.globals'),
+        title: text(options).get('label.globals'),
         url: projectChild.url,
       });
     }
-    const childGroups = this.getChildrenOrGroups(
-      projectChild,
-      outputFileStrategy,
-    );
+    const childGroups = getChildrenOrGroups(projectChild, outputFileStrategy);
 
     if (childGroups) {
       children.push(...childGroups);
     }
 
-    this.navigation.push({
+    navigation.push({
       title: projectChild.name,
       children,
       ...(projectChildUrl && { url: projectChildUrl }),
     });
   }
 
-  buildNavigationFromProject(
+  function buildNavigationFromProject(
     project: ProjectReflection | DeclarationReflection,
   ) {
+    const entryModule = options.getValue('entryModule');
     if (project.groups?.length) {
-      const entryModule = Boolean(
+      const isEntryModule = Boolean(
         project?.groups[0]?.children.find(
-          (child) => child.name === this.options.entryModule,
+          (child) => child.name === entryModule,
         ),
       );
       const isOnlyModules = project.children?.every((child) =>
         child.kindOf(ReflectionKind.Module),
       );
       if (
-        (project.groups.length === 1 && !Boolean(entryModule)) ||
+        (project.groups.length === 1 && !Boolean(isEntryModule)) ||
         isOnlyModules
       ) {
-        const children = this.getGroupChildren(project.groups[0]);
+        const children = getGroupChildren(project.groups[0]);
         if (children) {
-          this.navigation.push(
-            ...children.filter(
-              (child) => child.title !== this.options.entryModule,
-            ),
+          navigation.push(
+            ...children.filter((child) => child.title !== entryModule),
           );
         }
       } else {
         project.groups?.forEach((projectGroup) => {
-          const children = this.getGroupChildren(projectGroup);
+          const children = getGroupChildren(projectGroup);
           const indexModule = projectGroup.children.find(
-            (child) => child.name === this.options.entryModule,
+            (child) => child.name === entryModule,
           );
           if (children.length) {
-            this.navigation.push({
+            navigation.push({
               title: projectGroup.title,
-              children: children.filter(
-                (child) => child.title !== this.options.entryModule,
-              ),
+              children: children.filter((child) => child.title !== entryModule),
             });
           }
           if (indexModule) {
-            const children = this.getChildrenOrGroups(indexModule);
+            const children = getChildrenOrGroups(indexModule);
             if (children) {
-              this.navigation.push(...children);
+              navigation.push(...children);
             }
           }
         });
@@ -138,11 +138,11 @@ export class NavigationContext {
     }
   }
 
-  getCategoryGroupChildren(group: ReflectionCategory) {
+  function getCategoryGroupChildren(group: ReflectionCategory) {
     return group.children
       ?.filter((child) => child.hasOwnDocument)
       .map((child) => {
-        const children = this.getChildrenOrGroups(child);
+        const children = getChildrenOrGroups(child);
         return {
           title: child.name,
           url: child.url,
@@ -151,7 +151,7 @@ export class NavigationContext {
       });
   }
 
-  getGroupChildren(
+  function getGroupChildren(
     group: ReflectionGroup,
     outputFileStrategy?: OutputFileStrategy,
   ) {
@@ -159,7 +159,7 @@ export class NavigationContext {
       return group.categories?.map((category) => {
         return {
           title: category.title,
-          children: this.getCategoryGroupChildren(category),
+          children: getCategoryGroupChildren(category),
         };
       });
     }
@@ -167,7 +167,7 @@ export class NavigationContext {
     return group.children
       ?.filter((child) => child.hasOwnDocument)
       .map((child) => {
-        const mapping = this.theme.getTemplateMapping(
+        const mapping = theme.getTemplateMapping(
           child.kind,
           outputFileStrategy,
         );
@@ -176,7 +176,7 @@ export class NavigationContext {
           const children = child.categories?.length
             ? child.categories
                 ?.map((category) => {
-                  const catChildren = this.getCategoryGroupChildren(category);
+                  const catChildren = getCategoryGroupChildren(category);
                   return catChildren.length
                     ? {
                         title: category.title,
@@ -186,7 +186,7 @@ export class NavigationContext {
                 })
 
                 .filter((cat) => Boolean(cat))
-            : this.getChildrenOrGroups(child, outputFileStrategy);
+            : getChildrenOrGroups(child, outputFileStrategy);
           return {
             title: child.name,
             url: child.url,
@@ -196,21 +196,18 @@ export class NavigationContext {
       });
   }
 
-  getChildrenOrGroups(
+  function getChildrenOrGroups(
     reflection: DeclarationReflection,
     outputFileStrategy?: OutputFileStrategy,
   ) {
     if (
       reflection.groups?.some((group) => group.allChildrenHaveOwnDocument())
     ) {
-      if (this.options.excludeGroups) {
+      if (options.getValue('excludeGroups')) {
         return reflection.children
           ?.filter((child) => child.hasOwnDocument)
           .map((child) => {
-            const children = this.getChildrenOrGroups(
-              child,
-              outputFileStrategy,
-            );
+            const children = getChildrenOrGroups(child, outputFileStrategy);
             return {
               title: child.name,
               url: child.url,
@@ -225,17 +222,13 @@ export class NavigationContext {
 
       if (isModulesGroup) {
         return (
-          this.getGroupChildren(reflection.groups[0], outputFileStrategy) ||
-          null
+          getGroupChildren(reflection.groups[0], outputFileStrategy) || null
         );
       }
 
       return reflection.groups
         ?.map((group) => {
-          const groupChildren = this.getGroupChildren(
-            group,
-            outputFileStrategy,
-          );
+          const groupChildren = getGroupChildren(group, outputFileStrategy);
           return groupChildren.length
             ? {
                 title: group.title,

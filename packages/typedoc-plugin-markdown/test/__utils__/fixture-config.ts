@@ -68,7 +68,6 @@ export const FIXTURES: Fixture[] = [
         categorizeByGroup: false,
         excludeGroups: true,
         namedAnchors: true,
-        //membersWithOwnFile: ['Class', 'Interface', 'Enum'],
         plugin: [path.join(__dirname, '..', 'custom-plugins', 'custom-theme')],
         theme: 'custom-theme',
         indexFormat: 'table',
@@ -87,6 +86,8 @@ export const FIXTURES: Fixture[] = [
       enumMembersFormat: 'table',
       propertiesFormat: 'table',
       readme: 'none',
+      media: '../../stubs/media',
+      includes: '../../stubs/inc',
     },
     options: [
       {},

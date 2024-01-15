@@ -1,5 +1,6 @@
 import { DeclarationOption, ParameterType } from 'typedoc';
-import { FormatStyle, OutputFileStrategy, StaticText } from './maps';
+import { FormatStyle, OutputFileStrategy } from './option-maps';
+import { TEXT_MAPPING_DEFAULTS } from './text-mappings/text-mapping-defaults';
 
 /**
  *
@@ -276,15 +277,31 @@ export const indexFormat: Partial<DeclarationOption> = {
 export const textContentMappings: Partial<DeclarationOption> = {
   help: 'Provides a mechanism to change the content of text used in documentation.',
   type: ParameterType.Mixed,
-  defaultValue: StaticText,
+  defaultValue: TEXT_MAPPING_DEFAULTS,
   validate(value) {
     if (!value || typeof value !== 'object') {
-      throw new Error('textContentMappings must be an object.');
+      throw new Error(
+        '[typedoc-plugin-markdown] textContentMappings must be an object.',
+      );
     }
 
     for (const val of Object.values(value)) {
       if (typeof val !== 'string') {
-        throw new Error(`All values of textContentMappings must be strings.`);
+        throw new Error(
+          `[typedoc-plugin-markdown] All values of textContentMappings must be strings.`,
+        );
+      }
+    }
+
+    for (const key of Object.keys(value)) {
+      if (!Object.keys(TEXT_MAPPING_DEFAULTS).includes(key)) {
+        throw new Error(
+          `[typedoc-plugin-markdown] "${key}" is not a valid "textContentMappings" key. Valid keys are ${Object.keys(
+            TEXT_MAPPING_DEFAULTS,
+          )
+            .map((key) => `"${key}"`)
+            .join(', ')}.`,
+        );
       }
     }
   },

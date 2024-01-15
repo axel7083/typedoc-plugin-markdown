@@ -1,31 +1,6 @@
-import { KIND_DEFAULTS } from '../theme/constants/kinds';
+import { KIND_DEFAULTS } from './kind-defaults';
 
-/**
- * Defines outputFileStrategy model for the `outputFileStrategy` option.
- *
- * @enum
- *
- */
-export const OutputFileStrategy = {
-  Members: 'members',
-  Modules: 'modules',
-} as const;
-
-export type OutputFileStrategy =
-  (typeof OutputFileStrategy)[keyof typeof OutputFileStrategy];
-
-/**
- *
- * @enum
- */
-export const FormatStyle = {
-  List: 'list',
-  Table: 'table',
-} as const;
-
-export type FormatStyle = (typeof FormatStyle)[keyof typeof FormatStyle];
-
-export const StaticText = {
+export const TEXT_MAPPING_DEFAULTS = {
   'header.title': '{projectName} {version}',
   'header.readme': 'Readme',
   'header.docs': 'API',
@@ -59,12 +34,3 @@ export const StaticText = {
   'label.value': 'Value',
   ...KIND_DEFAULTS,
 };
-
-/*export const MembersWithOwnFile = [
-  ReflectionKind[ReflectionKind.Enum],
-  ReflectionKind[ReflectionKind.Variable],
-  ReflectionKind[ReflectionKind.Function],
-  ReflectionKind[ReflectionKind.Class],
-  ReflectionKind[ReflectionKind.Interface],
-  ReflectionKind[ReflectionKind.TypeAlias],
-];*/

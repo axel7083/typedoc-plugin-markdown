@@ -36,13 +36,18 @@ A basic module
 `;
 
 exports[`Groups should compile basic module index page: (Output File Strategy "members") (Option Group "2") 1`] = `
-"**typedoc-stubs** • API
+"> TOP BANNER using \`page.begin\` hook
 
-***
+<div style="display:flex; align-items:center;">
+  <img alt="My logo" src="https://placehold.co/100x50" style="margin-right: .5em;" />
+  <em>Welcome to typedoc-stubs with a customised header partial!!</em>
+</div>
 
 [typedoc-stubs](../index.md) / basic
 
 # basic
+
+> CONTENT BANNER using \`content.begin\` hook
 
 A basic module
 
@@ -76,7 +81,7 @@ A basic module
 | [TypeA](type-aliases/TypeA.md) | - |
 | [TypeB](type-aliases/TypeB.md) | - |
 
-CUSTOM FOOTER HERE
+**Generated on using \`page.end\` hook**
 "
 `;
 
@@ -160,13 +165,18 @@ A basic module
 `;
 
 exports[`Groups should compile basic module index page: (Output File Strategy "modules") (Option Group "2") 1`] = `
-"**typedoc-stubs** • API
+"> TOP BANNER using \`page.begin\` hook
 
-***
+<div style="display:flex; align-items:center;">
+  <img alt="My logo" src="https://placehold.co/100x50" style="margin-right: .5em;" />
+  <em>Welcome to typedoc-stubs with a customised header partial!!</em>
+</div>
 
 [typedoc-stubs](index.md) / basic
 
 # basic
+
+> CONTENT BANNER using \`content.begin\` hook
 
 A basic module
 
@@ -258,7 +268,7 @@ A basic module
 
 > **TypeB**: \`string\`
 
-CUSTOM FOOTER HERE
+**Generated on using \`page.end\` hook**
 "
 `;
 
@@ -320,13 +330,18 @@ A module that contains categories
 `;
 
 exports[`Groups should compile categories group page: (Output File Strategy "modules") (Option Group "2") 1`] = `
-"**typedoc-stubs** • API
+"> TOP BANNER using \`page.begin\` hook
 
-***
+<div style="display:flex; align-items:center;">
+  <img alt="My logo" src="https://placehold.co/100x50" style="margin-right: .5em;" />
+  <em>Welcome to typedoc-stubs with a customised header partial!!</em>
+</div>
 
 [typedoc-stubs](index.md) / has-categories
 
 # has-categories
+
+> CONTENT BANNER using \`content.begin\` hook
 
 A module that contains categories
 
@@ -390,7 +405,7 @@ A module that contains categories
 
 ### UnCategorizedInterace
 
-CUSTOM FOOTER HERE
+**Generated on using \`page.end\` hook**
 "
 `;
 
@@ -442,13 +457,18 @@ A module that contains categories
 `;
 
 exports[`Groups should compile categories index page: (Output File Strategy "members") (Option Group "2") 1`] = `
-"**typedoc-stubs** • API
+"> TOP BANNER using \`page.begin\` hook
 
-***
+<div style="display:flex; align-items:center;">
+  <img alt="My logo" src="https://placehold.co/100x50" style="margin-right: .5em;" />
+  <em>Welcome to typedoc-stubs with a customised header partial!!</em>
+</div>
 
 [typedoc-stubs](../index.md) / has-categories
 
 # has-categories
+
+> CONTENT BANNER using \`content.begin\` hook
 
 A module that contains categories
 
@@ -479,7 +499,7 @@ A module that contains categories
 | [UnCategorizedEnum](enumerations/UnCategorizedEnum.md) | - |
 | [UnCategorizedInterace](interfaces/UnCategorizedInterace.md) | - |
 
-CUSTOM FOOTER HERE
+**Generated on using \`page.end\` hook**
 "
 `;
 
@@ -503,11 +523,16 @@ exports[`Groups should compile index page for project: (Output File Strategy "me
 `;
 
 exports[`Groups should compile index page for project: (Output File Strategy "members") (Option Group "2") 1`] = `
-"**typedoc-stubs** • API
+"> TOP BANNER using \`page.begin\` hook
 
-***
+<div style="display:flex; align-items:center;">
+  <img alt="My logo" src="https://placehold.co/100x50" style="margin-right: .5em;" />
+  <em>Welcome to typedoc-stubs with a customised header partial!!</em>
+</div>
 
 # typedoc-stubs
+
+> CONTENT BANNER using \`content.begin\` hook
 
 ## Modules
 
@@ -521,7 +546,7 @@ exports[`Groups should compile index page for project: (Output File Strategy "me
 | [has-references](has-references/index.md) | A module that contains references |
 | [index](index/index.md) | A module named index |
 
-CUSTOM FOOTER HERE
+**Generated on using \`page.end\` hook**
 "
 `;
 
@@ -545,11 +570,16 @@ exports[`Groups should compile index page for project: (Output File Strategy "mo
 `;
 
 exports[`Groups should compile index page for project: (Output File Strategy "modules") (Option Group "2") 1`] = `
-"**typedoc-stubs** • API
+"> TOP BANNER using \`page.begin\` hook
 
-***
+<div style="display:flex; align-items:center;">
+  <img alt="My logo" src="https://placehold.co/100x50" style="margin-right: .5em;" />
+  <em>Welcome to typedoc-stubs with a customised header partial!!</em>
+</div>
 
 # typedoc-stubs
+
+> CONTENT BANNER using \`content.begin\` hook
 
 ## Modules
 
@@ -563,7 +593,7 @@ exports[`Groups should compile index page for project: (Output File Strategy "mo
 | [has-references](has-references.md) | A module that contains references |
 | [index](module.index.md) | A module named index |
 
-CUSTOM FOOTER HERE
+**Generated on using \`page.end\` hook**
 "
 `;
 
@@ -589,13 +619,18 @@ exports[`Groups should compile module index for a namespace: (Output File Strate
 `;
 
 exports[`Groups should compile module index for a namespace: (Output File Strategy "members") (Option Group "2") 1`] = `
-"**typedoc-stubs** • API
+"> TOP BANNER using \`page.begin\` hook
 
-***
+<div style="display:flex; align-items:center;">
+  <img alt="My logo" src="https://placehold.co/100x50" style="margin-right: .5em;" />
+  <em>Welcome to typedoc-stubs with a customised header partial!!</em>
+</div>
 
 [typedoc-stubs](../../../index.md) / [has-namespaces](../../index.md) / \\_Namespace\\_A\\_
 
 # Namespace: \\_Namespace\\_A\\_
+
+> CONTENT BANNER using \`content.begin\` hook
 
 ## Index
 
@@ -611,7 +646,7 @@ exports[`Groups should compile module index for a namespace: (Output File Strate
 | :------ | :------ |
 | [NamespaceInterface](interfaces/NamespaceInterface.md) | - |
 
-CUSTOM FOOTER HERE
+**Generated on using \`page.end\` hook**
 "
 `;
 
@@ -635,13 +670,18 @@ exports[`Groups should compile module index for a namespace: (Output File Strate
 `;
 
 exports[`Groups should compile module index for a namespace: (Output File Strategy "modules") (Option Group "2") 1`] = `
-"**typedoc-stubs** • API
+"> TOP BANNER using \`page.begin\` hook
 
-***
+<div style="display:flex; align-items:center;">
+  <img alt="My logo" src="https://placehold.co/100x50" style="margin-right: .5em;" />
+  <em>Welcome to typedoc-stubs with a customised header partial!!</em>
+</div>
 
 [typedoc-stubs](../../../index.md) / [has-namespaces](../../index.md) / \\_Namespace\\_A\\_
 
 # Namespace: \\_Namespace\\_A\\_
+
+> CONTENT BANNER using \`content.begin\` hook
 
 ## Namespaces
 
@@ -653,7 +693,7 @@ exports[`Groups should compile module index for a namespace: (Output File Strate
 
 ## NamespaceInterface
 
-CUSTOM FOOTER HERE
+**Generated on using \`page.end\` hook**
 "
 `;
 
@@ -708,13 +748,18 @@ A module that contains namespaces
 `;
 
 exports[`Groups should compile module index with namespaces index page: (Output File Strategy "members") (Option Group "2") 1`] = `
-"**typedoc-stubs** • API
+"> TOP BANNER using \`page.begin\` hook
 
-***
+<div style="display:flex; align-items:center;">
+  <img alt="My logo" src="https://placehold.co/100x50" style="margin-right: .5em;" />
+  <em>Welcome to typedoc-stubs with a customised header partial!!</em>
+</div>
 
 [typedoc-stubs](../index.md) / has-namespaces
 
 # has-namespaces
+
+> CONTENT BANNER using \`content.begin\` hook
 
 A module that contains namespaces
 
@@ -769,7 +814,7 @@ A module that contains namespaces
 | [\\_function\\_A\\_](functions/function_A_.md) | - |
 | [functionB](functions/functionB.md) | - |
 
-CUSTOM FOOTER HERE
+**Generated on using \`page.end\` hook**
 "
 `;
 
@@ -880,13 +925,18 @@ A module that contains namespaces
 `;
 
 exports[`Groups should compile module index with namespaces index page: (Output File Strategy "modules") (Option Group "2") 1`] = `
-"**typedoc-stubs** • API
+"> TOP BANNER using \`page.begin\` hook
 
-***
+<div style="display:flex; align-items:center;">
+  <img alt="My logo" src="https://placehold.co/100x50" style="margin-right: .5em;" />
+  <em>Welcome to typedoc-stubs with a customised header partial!!</em>
+</div>
 
 [typedoc-stubs](../index.md) / has-namespaces
 
 # has-namespaces
+
+> CONTENT BANNER using \`content.begin\` hook
 
 A module that contains namespaces
 
@@ -1011,7 +1061,7 @@ A module that contains namespaces
 
 \`void\`
 
-CUSTOM FOOTER HERE
+**Generated on using \`page.end\` hook**
 "
 `;
 
@@ -1070,13 +1120,18 @@ Renames and re-exports [defaultFunction](has-references.md#defaultfunction)
 `;
 
 exports[`Groups should compile references group page: (Output File Strategy "modules") (Option Group "2") 1`] = `
-"**typedoc-stubs** • API
+"> TOP BANNER using \`page.begin\` hook
 
-***
+<div style="display:flex; align-items:center;">
+  <img alt="My logo" src="https://placehold.co/100x50" style="margin-right: .5em;" />
+  <em>Welcome to typedoc-stubs with a customised header partial!!</em>
+</div>
 
 [typedoc-stubs](index.md) / has-references
 
 # has-references
+
+> CONTENT BANNER using \`content.begin\` hook
 
 A module that contains references
 
@@ -1108,7 +1163,7 @@ Renames and re-exports [defaultFunction](has-references.md#defaultfunction)
 
 \`string\`
 
-CUSTOM FOOTER HERE
+**Generated on using \`page.end\` hook**
 "
 `;
 
@@ -1148,13 +1203,18 @@ Renames and re-exports [defaultFunction](functions/defaultFunction.md)
 `;
 
 exports[`Groups should compile references index page: (Output File Strategy "members") (Option Group "2") 1`] = `
-"**typedoc-stubs** • API
+"> TOP BANNER using \`page.begin\` hook
 
-***
+<div style="display:flex; align-items:center;">
+  <img alt="My logo" src="https://placehold.co/100x50" style="margin-right: .5em;" />
+  <em>Welcome to typedoc-stubs with a customised header partial!!</em>
+</div>
 
 [typedoc-stubs](../index.md) / has-references
 
 # has-references
+
+> CONTENT BANNER using \`content.begin\` hook
 
 A module that contains references
 
@@ -1186,6 +1246,6 @@ Renames and re-exports [InterfaceB](../basic/interfaces/InterfaceB.md)
 
 Renames and re-exports [defaultFunction](functions/defaultFunction.md)
 
-CUSTOM FOOTER HERE
+**Generated on using \`page.end\` hook**
 "
 `;
